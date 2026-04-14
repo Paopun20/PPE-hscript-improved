@@ -21,7 +21,7 @@
  */
 package hscript;
 
-import hscript.thx_semver.Version;
+import thx.semver.Version;
 import hscript.Expr;
 
 using StringTools;
