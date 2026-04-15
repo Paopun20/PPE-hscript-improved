@@ -1,2 +1,4 @@
 bin/build-each.hxml
+-L thx.semver
+-D hscriptPos
 -hl bin/Test.hl

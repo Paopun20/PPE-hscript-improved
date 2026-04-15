@@ -468,7 +468,7 @@ class Printer {
 		return new Printer().exprToString(e);
 	}
 
-	public static function errorToString( e : Expr.Error ):String {
+	public static function errorToString( e : Expr.Error, ?fullMessage:Bool ):String {
 		var message = switch( #if hscriptPos e.e #else e #end ) {
 			case EInvalidChar(c): "Invalid character: '"+(StringTools.isEof(c) ? "EOF (End Of File)" : String.fromCharCode(c))+"' ("+c+")";
 			case EUnexpected(s): "Unexpected token: \""+s+"\"";
@@ -483,12 +483,15 @@ class Printer {
 			case EInvalidClass(cla): "Invalid class: " + cla + " was not found.";
 			case EAlreadyExistingClass(cla): 'Custom Class named $cla already exists.';
 		};
+
+		if (!fullMessage) {
+			return message;
+		}
+		
 		#if hscriptPos
 		return e.origin + ":" + e.line + ": " + message;
 		#else
 		return message;
 		#end
 	}
-
-
 }
